@@ -18,9 +18,13 @@ class Solution:
         w = np.zeros(X.shape[1]) # vector with (n_features,)
         b = 0
         for _ in range(epochs):
+            # forward pass
             y_hat = X @ w + b
-            dw = 2/n * X.T @ (y_hat-y)
-            db = 2/n * np.sum(y_hat-y)
+            # loss and backward pass
+            error = y_hat-y
+            dw = 2/n * X.T @ error
+            db = 2/n * np.sum(error)
+            # update
             w -= lr*dw
             b -= lr*db
         return (np.round(w, 5), round(b, 5))
